@@ -38,6 +38,11 @@ urlpatterns = [
 ]
 
 
+from django.views.static import serve
+urlpatterns.append(url(r'^(?P<path>serviceworker.js)$', serve, {'document_root': './static/'}))
+
+
+
 # This will work if DEBUG is True
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns += staticfiles_urlpatterns()

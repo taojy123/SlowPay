@@ -22,18 +22,24 @@ from pywebpush import webpush, WebPusher
 #         }
 #     )
 
+
+
 requests_session = requests.Session()
 requests_session.proxies = {'https': '127.0.0.1:1087'}
 
 subscription_info = {
-    "endpoint": "https://fcm.googleapis.com/fcm/send/duHjPCRYDC0:APA91bGciB7SJPPc2lEVynONxSWtdT-9GQltSDxcPPlA63RYzx5SNnsZth6bplHFsNq2KIwKds0sTT6DDZv-FenlWvCeWfJ0nv63ujxnXO5OBf-XTkd2hGcehc3s4gZjLwVJqVHSJK2X",
+    "endpoint": "https://fcm.googleapis.com/fcm/send/f1f0D2qnk7E:APA91bFyjlMMZtoCmq5InsSA2tFFfBxsgIzWqKaEtWFiaEJCWcQ-siOiDWi17lEQ7L59TDb9753QzPhuk-8c3sgnSiaJPrzHDM-kgDc1jhJXu_07j_foZ1MrNa0x1OcLyID8qpZN9UnX",
     "keys": {
-        "p256dh": "BDzxFBM5d_L5LSSYFpyyerRyjKRxUOEdrVP7bG69HTt-gedRHzdOzCul2jDKaNWR9wrcimbR9RGnolmCu7XsuO0=",
-        "auth": "Q8xHPxVA8AmMJSjSkp_IEQ=="
+        "p256dh": "BLD91WCBt-TujPbp9zPz80DTt3KGFih_eK7y20QKYtLcrU-7bkcMo39tRVxgJwL4UlxK7cuPp8SVzyw7KbFI-4g=",
+        "auth": "J746gdrGce0Dz6mnntgi7w=="
     }
 }
-data = u'哈哈'
-vapid_private_key = "/Users/taojy123/workspace/SlowPay/vap/private_key.pem"
+data = 'aaaaaa'
+vapid_private_key = PRIVATE_KEY = '''
+MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg2xyYpqQhOaIdSbqH
+UwM3+ySvF47MoJyAFUNaHM7g/zOhRANCAAT554ztzCpjiIFOxNfEIicSzNPOZTIB
+Y1+CGl+LDfM5RlUNERFdfZYRqMmwvX7ydq7UiASkspWqdVVKZnLCzPD3  
+'''.strip()
 vapid_claims = {
     "sub": "mailto:taojy123@163.com"
 }

@@ -1,15 +1,55 @@
-from pywebpush import webpush
+#coding=utf8
+from urlparse import urlparse
 
-webpush(
-        subscription_info={
-            "endpoint": "https://fcm.googleapis.com/fcm/send/cVWIU5ahCfg:APA91bEaaDWYqAKAwZoaSPSQxMujb9Dzd5bK_6VNZX-OJhJSKqjog48a3uEcEa7vLzqTQ9zN6KYhqg7KB1LnGZnghmY2cyiEkyTMky9BvTgyDpJ4pRa-8qFFqY0GzsmCLQM1a0QGZNjh",
-            "keys": {
-                "p256dh": "BAlEd7I2B7RllG8kx3fbWv5fnfIV4kt_W6LC62lIYH2vLAI49_mLARaM5zSktDr2eAQH33Dysh2FTPj0wzALxaU=",
-                "auth": "0vw5-Iy1SES-dyrtwXpZng=="
-            }},
-        data="Mary had a little lamb, with a nice mint jelly",
-        vapid_private_key="/Users/taojy123/workspace/SlowPay/vap/private_key.pem",
-        # vapid_claims={
-        #         "sub": "YourNameHere@example.org",
-        #     }
-    )
+import os
+
+import requests
+from py_vapid import Vapid
+from pywebpush import webpush, WebPusher
+
+# webpush(
+#         subscription_info={
+#             "endpoint": "https://fcm.googleapis.com/fcm/send/duHjPCRYDC0:APA91bGciB7SJPPc2lEVynONxSWtdT-9GQltSDxcPPlA63RYzx5SNnsZth6bplHFsNq2KIwKds0sTT6DDZv-FenlWvCeWfJ0nv63ujxnXO5OBf-XTkd2hGcehc3s4gZjLwVJqVHSJK2X",
+#             "keys": {
+#                 "p256dh": "BDzxFBM5d_L5LSSYFpyyerRyjKRxUOEdrVP7bG69HTt-gedRHzdOzCul2jDKaNWR9wrcimbR9RGnolmCu7XsuO0=",
+#                 "auth": "Q8xHPxVA8AmMJSjSkp_IEQ=="
+#             }
+#         },
+#         data=u'哈哈',
+#         vapid_private_key="/Users/taojy123/workspace/SlowPay/vap/private_key.pem",
+#         vapid_claims={
+#             "sub": "mailto:taojy123@163.com"
+#         }
+#     )
+
+requests_session = requests.Session()
+requests_session.proxies = {'https': '127.0.0.1:1087'}
+
+subscription_info = {
+    "endpoint": "https://fcm.googleapis.com/fcm/send/duHjPCRYDC0:APA91bGciB7SJPPc2lEVynONxSWtdT-9GQltSDxcPPlA63RYzx5SNnsZth6bplHFsNq2KIwKds0sTT6DDZv-FenlWvCeWfJ0nv63ujxnXO5OBf-XTkd2hGcehc3s4gZjLwVJqVHSJK2X",
+    "keys": {
+        "p256dh": "BDzxFBM5d_L5LSSYFpyyerRyjKRxUOEdrVP7bG69HTt-gedRHzdOzCul2jDKaNWR9wrcimbR9RGnolmCu7XsuO0=",
+        "auth": "Q8xHPxVA8AmMJSjSkp_IEQ=="
+    }
+}
+data = u'哈哈'
+vapid_private_key = "/Users/taojy123/workspace/SlowPay/vap/private_key.pem"
+vapid_claims = {
+    "sub": "mailto:taojy123@163.com"
+}
+
+vapid_headers = None
+if vapid_claims:
+    if not vapid_claims.get('aud'):
+        url = urlparse(subscription_info.get('endpoint'))
+        aud = "{}://{}".format(url.scheme, url.netloc)
+        vapid_claims['aud'] = aud
+    if os.path.isfile(vapid_private_key):
+        vv = Vapid.from_file(private_key_file=vapid_private_key)  # pragma no cover
+    else:
+        vv = Vapid.from_string(private_key=vapid_private_key)
+    vapid_headers = vv.sign(vapid_claims)
+
+result = WebPusher(subscription_info, requests_session).send(data, vapid_headers)
+
+print result.text

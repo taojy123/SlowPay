@@ -28,10 +28,10 @@ requests_session = requests.Session()
 requests_session.proxies = {'https': '127.0.0.1:1087'}
 
 subscription_info = {
-    "endpoint": "https://fcm.googleapis.com/fcm/send/f1f0D2qnk7E:APA91bFyjlMMZtoCmq5InsSA2tFFfBxsgIzWqKaEtWFiaEJCWcQ-siOiDWi17lEQ7L59TDb9753QzPhuk-8c3sgnSiaJPrzHDM-kgDc1jhJXu_07j_foZ1MrNa0x1OcLyID8qpZN9UnX",
+    "endpoint": "https://fcm.googleapis.com/fcm/send/d1-ZTtIbxCM:APA91bEbQ7HE8u_XDLNKQZJ4bqiey_EiGZjZcjauv49KU-1uF0CEukKYgcWDWTxhSByJuDLmZOwMl8xmK2YkCobB81AwCexNW4bw9FVCkcUX7K-meghbZ5UyGe2VS1jQ_uzE6n64i4xK",
     "keys": {
-        "p256dh": "BLD91WCBt-TujPbp9zPz80DTt3KGFih_eK7y20QKYtLcrU-7bkcMo39tRVxgJwL4UlxK7cuPp8SVzyw7KbFI-4g=",
-        "auth": "J746gdrGce0Dz6mnntgi7w=="
+        "p256dh": "BK7h-R0UgDeT89jhWi76-FlTtlEr3DbVBnrr34qmK91Husli_Fazu7vo7kW1mg9F_qhNzrs2glbrc6wfqGFsXks=",
+        "auth": "CyOHiGNXPcT5Slo9UMx2uA=="
     }
 }
 data = 'aaaaaa'
